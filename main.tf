@@ -70,7 +70,7 @@ resource "aws_route_table_association" "main" {
 
 resource "aws_security_group" "ssh" {
   name = "${var.name}-ssh"
-  description = "for ${var.name}-vpc (tf)"
+  description = "for ${var.name}-vpc"
 
   vpc_id = "${aws_vpc.default.id}"
 
@@ -104,7 +104,7 @@ resource "aws_security_group" "ssh" {
 
 resource "aws_security_group" "web" {
   name = "${var.name}-web"
-  description = "for ${var.name}-vpc (tf)"
+  description = "for ${var.name}-vpc"
 
   vpc_id = "${aws_vpc.default.id}"
 
