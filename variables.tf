@@ -6,7 +6,6 @@ variable "prefix" {
   default = "demo"
 }
 
-variable "name" {
-  default = "demo"
-  description = "Solution name, e.g. 'app' or 'demo'"
+variable "cidr_block" {
+  default = "10.0.0.0/16"
 }

@@ -3,11 +3,11 @@
 data "aws_availability_zones" "available" {}
 
 resource "aws_vpc" "default" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "${var.cidr_block}"
   enable_dns_hostnames = true
 
   tags {
-    Name = "${var.name}-vpc"
+    Name = "${var.prefix}-vpc"
   }
 }
 
@@ -21,7 +21,7 @@ resource "aws_subnet" "private" {
   map_public_ip_on_launch = true
 
   tags {
-    Name = "${var.name}-private"
+    Name = "${var.prefix}-private"
   }
 }
 
@@ -31,11 +31,11 @@ resource "aws_subnet" "public" {
   count = "${length(data.aws_availability_zones.available.names)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
-  cidr_block = "${cidrsubnet(aws_vpc.default.cidr_block, 8, length(data.aws_availability_zones.available.names) + count.index)}"
+  cidr_block = "${cidrsubnet(aws_vpc.default.cidr_block, 8, 10 + count.index)}"
   map_public_ip_on_launch = true
 
   tags {
-    Name = "${var.name}-public"
+    Name = "${var.prefix}-public"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_internet_gateway" "default" {
   vpc_id = "${aws_vpc.default.id}"
 
   tags {
-    Name = "${var.name}"
+    Name = "${var.prefix}"
   }
 }
 
@@ -56,7 +56,7 @@ resource "aws_route_table" "default" {
   }
 
   tags {
-    Name = "${var.name}"
+    Name = "${var.prefix}"
   }
 }
 
@@ -69,8 +69,8 @@ resource "aws_route_table_association" "main" {
 # Security Group
 
 resource "aws_security_group" "ssh" {
-  name = "${var.name}-ssh"
-  description = "for ${var.name}-vpc"
+  name = "${var.prefix}-ssh"
+  description = "for ${var.prefix}-vpc"
 
   vpc_id = "${aws_vpc.default.id}"
 
@@ -103,8 +103,8 @@ resource "aws_security_group" "ssh" {
 }
 
 resource "aws_security_group" "web" {
-  name = "${var.name}-web"
-  description = "for ${var.name}-vpc"
+  name = "${var.prefix}-web"
+  description = "for ${var.prefix}-vpc"
 
   vpc_id = "${aws_vpc.default.id}"
 
