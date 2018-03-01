@@ -17,8 +17,8 @@ resource "aws_subnet" "private" {
   count = "${length(data.aws_availability_zones.available.names)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
-  cidr_block = "${cidrsubnet(  aws_vpc.default.cidr_block, ceil(log(length(data.aws_availability_zones.available.names) * 2, 2)), count.index)}"
-  //map_public_ip_on_launch = true
+  cidr_block = "${cidrsubnet(aws_vpc.default.cidr_block, 8, count.index)}"
+  map_public_ip_on_launch = true
 
   tags {
     Name = "${var.name}-private"
@@ -31,7 +31,7 @@ resource "aws_subnet" "public" {
   count = "${length(data.aws_availability_zones.available.names)}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
 
-  cidr_block = "${cidrsubnet(   aws_vpc.default.cidr_block, ceil(log(length(data.aws_availability_zones.available.names) * 2, 2)), length(data.aws_availability_zones.available.names) + count.index)}"
+  cidr_block = "${cidrsubnet(aws_vpc.default.cidr_block, 8, length(data.aws_availability_zones.available.names) + count.index)}"
   map_public_ip_on_launch = true
 
   tags {
