@@ -63,10 +63,6 @@ resource "aws_route_table" "public" {
 resource "aws_route_table" "private" {
   vpc_id = "${aws_vpc.default.id}"
 
-  route {
-    cidr_block = "0.0.0.0/0"
-  }
-
   tags {
     Name = "${var.prefix}-private"
   }
