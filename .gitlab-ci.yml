@@ -9,10 +9,6 @@ image:
 variables:
   PLAN: plan.tfplan
 
-cache:
-  paths:
-    - .terraform
-
 stages:
   - plan
 
