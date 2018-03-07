@@ -16,7 +16,8 @@ output "private_subnet_ids" {
 
 output "security_group_ids" {
   value = [
+    "${aws_security_group.self.id}",
     "${aws_security_group.ssh.id}",
-    "${aws_security_group.web.id}"
+    "${aws_security_group.web.id}",
   ]
 }
