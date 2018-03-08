@@ -9,6 +9,14 @@ resource "aws_vpc" "default" {
   }
 }
 
+resource "aws_internet_gateway" "default" {
+  vpc_id = "${aws_vpc.default.id}"
+
+  tags {
+    Name = "${var.prefix}"
+  }
+}
+
 resource "aws_subnet" "private" {
   vpc_id = "${aws_vpc.default.id}"
 
@@ -34,14 +42,6 @@ resource "aws_subnet" "public" {
 
   tags {
     Name = "${var.prefix}-public"
-  }
-}
-
-resource "aws_internet_gateway" "default" {
-  vpc_id = "${aws_vpc.default.id}"
-
-  tags {
-    Name = "${var.prefix}"
   }
 }
 

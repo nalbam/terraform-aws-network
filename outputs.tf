@@ -21,3 +21,15 @@ output "security_group_ids" {
     "${aws_security_group.web.id}",
   ]
 }
+
+output "security_group_self" {
+  value = "${aws_security_group.self.id}"
+}
+
+output "security_group_ssh" {
+  value = "${aws_security_group.ssh.id}"
+}
+
+output "security_group_web" {
+  value = "${aws_security_group.web.id}"
+}
