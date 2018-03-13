@@ -2,6 +2,12 @@ output "vpc_id" {
   value = "${aws_vpc.default.id}"
 }
 
+output "zone_names" {
+  value = [
+    "${data.aws_availability_zones.available.names}"
+  ]
+}
+
 output "public_subnet_ids" {
   value = [
     "${aws_subnet.public.*.id}"
