@@ -4,7 +4,7 @@ output "vpc_id" {
 
 output "zone_names" {
   value = [
-    "${data.aws_availability_zones.available.names}"
+    "${data.aws_availability_zones.azs.names}"
   ]
 }
 
