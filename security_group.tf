@@ -24,7 +24,7 @@ resource "aws_security_group" "self" {
 
   # ensure the VPC has an Internet gateway or this step will fail
   depends_on = [
-    "aws_internet_gateway.default",
+    "aws_internet_gateway.default"
   ]
 }
 
@@ -40,7 +40,7 @@ resource "aws_security_group" "ssh" {
     to_port = 22
     protocol = "tcp"
     cidr_blocks = [
-      "0.0.0.0/0",
+      "0.0.0.0/0"
     ]
   }
 
@@ -50,13 +50,13 @@ resource "aws_security_group" "ssh" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = [
-      "0.0.0.0/0",
+      "0.0.0.0/0"
     ]
   }
 
   # ensure the VPC has an Internet gateway or this step will fail
   depends_on = [
-    "aws_internet_gateway.default",
+    "aws_internet_gateway.default"
   ]
 }
 
@@ -112,12 +112,12 @@ resource "aws_security_group" "web" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = [
-      "0.0.0.0/0",
+      "0.0.0.0/0"
     ]
   }
 
   # ensure the VPC has an Internet gateway or this step will fail
   depends_on = [
-    "aws_internet_gateway.default",
+    "aws_internet_gateway.default"
   ]
 }
