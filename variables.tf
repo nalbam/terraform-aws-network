@@ -10,5 +10,5 @@ variable "prefix" {
 
 variable "cidr_block" {
   description = "The cidr block of the desired VPC."
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
 }
