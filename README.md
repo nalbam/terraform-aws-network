@@ -8,5 +8,6 @@ module "network" {
   region = "ap-northeast-2"
 
   prefix = "dev"
+  cidr_block = "10.0.0.0/16"
 }
 ```
