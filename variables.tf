@@ -1,6 +1,7 @@
-data "aws_availability_zones" "azs" {}
+data "aws_availability_zones" "azs" {
+}
 
-variable region {
+variable "region" {
   default = "us-east-1"
 }
 

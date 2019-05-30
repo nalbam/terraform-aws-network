@@ -4,7 +4,7 @@ resource "aws_security_group" "self" {
   name        = "${var.prefix}-self"
   description = "for ${var.prefix}-vpc"
 
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = aws_vpc.default.id
 
   # SELF
   ingress {
@@ -23,16 +23,14 @@ resource "aws_security_group" "self" {
   }
 
   # ensure the VPC has an Internet gateway or this step will fail
-  depends_on = [
-    "aws_internet_gateway.default",
-  ]
+  depends_on = [aws_internet_gateway.default]
 }
 
 resource "aws_security_group" "ssh" {
   name        = "${var.prefix}-ssh"
   description = "for ${var.prefix}-vpc"
 
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = aws_vpc.default.id
 
   # SSH
   ingress {
@@ -57,16 +55,14 @@ resource "aws_security_group" "ssh" {
   }
 
   # ensure the VPC has an Internet gateway or this step will fail
-  depends_on = [
-    "aws_internet_gateway.default",
-  ]
+  depends_on = [aws_internet_gateway.default]
 }
 
 resource "aws_security_group" "web" {
   name        = "${var.prefix}-web"
   description = "for ${var.prefix}-vpc"
 
-  vpc_id = "${aws_vpc.default.id}"
+  vpc_id = aws_vpc.default.id
 
   # HTTP
   ingress {
@@ -124,7 +120,5 @@ resource "aws_security_group" "web" {
   }
 
   # ensure the VPC has an Internet gateway or this step will fail
-  depends_on = [
-    "aws_internet_gateway.default",
-  ]
+  depends_on = [aws_internet_gateway.default]
 }
